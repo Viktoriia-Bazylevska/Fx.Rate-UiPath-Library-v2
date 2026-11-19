@@ -77,114 +77,126 @@
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <Assign sap2010:Annotation.AnnotationText="Initializes the success output to false so every execution path has a safe failure default." DisplayName="Initialize success output" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Boolean">
-          <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">out_Success</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Boolean">
-          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">false</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap2010:Annotation.AnnotationText="Initializes the decimal rate output before validation and service processing." DisplayName="Initialize rate output" sap2010:WorkflowViewState.IdRef="Assign_2">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Decimal">
-          <CSharpReference x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">out_Rate</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Decimal">
-          <CSharpValue x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">0m</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap2010:Annotation.AnnotationText="Initializes the returned-date output to DateTime.MinValue until a valid result supplies a date." DisplayName="Initialize rate date output" sap2010:WorkflowViewState.IdRef="Assign_3">
-      <Assign.To>
-        <OutArgument x:TypeArguments="s:DateTime">
-          <CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">out_RateDate</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="s:DateTime">
-          <CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">DateTime.MinValue</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap2010:Annotation.AnnotationText="Clears the error output so successful paths return an empty message." DisplayName="Initialize error output" sap2010:WorkflowViewState.IdRef="Assign_4">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">
-          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">out_ErrorMessage</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">
-          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">string.Empty</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap2010:Annotation.AnnotationText="Trims and uppercases the base currency so validation and the API request use a canonical code." DisplayName="Normalize base currency" sap2010:WorkflowViewState.IdRef="Assign_5">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">
-          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">baseCurrency</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">
-          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">in_BaseCurrency == null ? string.Empty : in_BaseCurrency.Trim().ToUpperInvariant()</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap2010:Annotation.AnnotationText="Trims and uppercases the quote currency so validation and response matching use a canonical code." DisplayName="Normalize quote currency" sap2010:WorkflowViewState.IdRef="Assign_6">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">
-          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">quoteCurrency</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">
-          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">in_QuoteCurrency == null ? string.Empty : in_QuoteCurrency.Trim().ToUpperInvariant()</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap2010:Annotation.AnnotationText="Checks that the normalized base currency contains exactly three ASCII letters before any external call." DisplayName="Validate base currency format" sap2010:WorkflowViewState.IdRef="Assign_7">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Boolean">
-          <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">baseCurrencyValid</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Boolean">
-          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">System.Text.RegularExpressions.Regex.IsMatch(baseCurrency, "^[A-Za-z]{3}$")</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap2010:Annotation.AnnotationText="Checks that the normalized quote currency contains exactly three ASCII letters before any external call." DisplayName="Validate quote currency format" sap2010:WorkflowViewState.IdRef="Assign_8">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Boolean">
-          <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_8">quoteCurrencyValid</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Boolean">
-          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">System.Text.RegularExpressions.Regex.IsMatch(quoteCurrency, "^[A-Za-z]{3}$")</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap2010:Annotation.AnnotationText="Checks that the requested date is today or earlier because future reference rates are invalid." DisplayName="Validate requested rate date" sap2010:WorkflowViewState.IdRef="Assign_9">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Boolean">
-          <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_9">rateDateValid</CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Boolean">
-          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">in_RateDate.Date &lt;= DateTime.Today</CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
+    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Sets: out_Success, out_Rate, out_RateDate, and out_ErrorMessage to their safe initial values." DisplayName="Initialize outputs" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Boolean">
+                <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">out_Success</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Boolean">
+                <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">false</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Decimal">
+                <CSharpReference x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">out_Rate</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Decimal">
+                <CSharpValue x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">0m</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="s:DateTime">
+                <CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">out_RateDate</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="s:DateTime">
+                <CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">DateTime.MinValue</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">
+                <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">out_ErrorMessage</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">
+                <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">string.Empty</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Sets: baseCurrency, quoteCurrency, baseCurrencyValid, quoteCurrencyValid, and rateDateValid by normalizing and validating the inputs in order." DisplayName="Normalize and validate inputs" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="5">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">
+                <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">baseCurrency</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">
+                <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">in_BaseCurrency == null ? string.Empty : in_BaseCurrency.Trim().ToUpperInvariant()</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">
+                <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">quoteCurrency</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">
+                <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">in_QuoteCurrency == null ? string.Empty : in_QuoteCurrency.Trim().ToUpperInvariant()</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Boolean">
+                <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">baseCurrencyValid</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Boolean">
+                <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">System.Text.RegularExpressions.Regex.IsMatch(baseCurrency, "^[A-Za-z]{3}$")</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Boolean">
+                <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_8">quoteCurrencyValid</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Boolean">
+                <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">System.Text.RegularExpressions.Regex.IsMatch(quoteCurrency, "^[A-Za-z]{3}$")</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Boolean">
+                <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_9">rateDateValid</CSharpReference>
+              </OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Boolean">
+                <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">in_RateDate.Date &lt;= DateTime.Today</CSharpValue>
+              </InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
     <If sap2010:Annotation.AnnotationText="Stops invalid requests before the same-currency shortcut or HTTP call, returning a contract-defined validation message." DisplayName="Validate currency and date inputs" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
@@ -214,52 +226,57 @@
           </ui:LogMessage>
         </Sequence>
       </If.Then>
-      <If.Else>
-        <Sequence sap2010:Annotation.AnnotationText="Continues with the same-currency shortcut or the external lookup after input validation succeeds." DisplayName="Valid input branch" sap2010:WorkflowViewState.IdRef="Sequence_3">
-          <If sap2010:Annotation.AnnotationText="Avoids the external API when the normalized base and quote currencies are equal." DisplayName="Check same currency request" sap2010:WorkflowViewState.IdRef="If_2">
-            <If.Condition>
-              <InArgument x:TypeArguments="x:Boolean">
-                <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14">baseCurrency == quoteCurrency</CSharpValue>
-              </InArgument>
-            </If.Condition>
-            <If.Then>
+    </If>
+    <If sap2010:Annotation.AnnotationText="Avoids the external API when the normalized base and quote currencies are equal." DisplayName="Check same currency request" sap2010:WorkflowViewState.IdRef="If_2">
+      <If.Condition>
+        <InArgument x:TypeArguments="x:Boolean">
+          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14">baseCurrencyValid &amp;&amp; quoteCurrencyValid &amp;&amp; rateDateValid &amp;&amp; baseCurrency == quoteCurrency</CSharpValue>
+        </InArgument>
+      </If.Condition>
+      <If.Then>
               <Sequence sap2010:Annotation.AnnotationText="Returns a rate of one for equal currencies without making an HTTP request." DisplayName="Same currency branch" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                <Assign sap2010:Annotation.AnnotationText="Marks the same-currency request successful because no conversion is required." DisplayName="Set same-currency success" sap2010:WorkflowViewState.IdRef="Assign_11">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:Boolean">
-                      <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_11">out_Success</CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:Boolean">
-                      <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_15">true</CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-                <Assign sap2010:Annotation.AnnotationText="Sets the exchange rate to one for a same-currency request." DisplayName="Set same-currency rate" sap2010:WorkflowViewState.IdRef="Assign_12">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:Decimal">
-                      <CSharpReference x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">out_Rate</CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:Decimal">
-                      <CSharpValue x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpValue`1_16">1m</CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-                <Assign sap2010:Annotation.AnnotationText="Returns the requested date because no API response date exists for the shortcut." DisplayName="Set same-currency date" sap2010:WorkflowViewState.IdRef="Assign_13">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="s:DateTime">
-                      <CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_13">out_RateDate</CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="s:DateTime">
-                      <CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_17">in_RateDate</CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
+                <ui:MultipleAssign sap2010:Annotation.AnnotationText="Sets: out_Success, out_Rate, and out_RateDate for the same-currency shortcut." DisplayName="Set same-currency outputs" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                  <ui:MultipleAssign.AssignOperations>
+                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="3">
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:Boolean">
+                            <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_11">out_Success</CSharpReference>
+                          </OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:Boolean">
+                            <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_15">true</CSharpValue>
+                          </InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:Decimal">
+                            <CSharpReference x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">out_Rate</CSharpReference>
+                          </OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:Decimal">
+                            <CSharpValue x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpValue`1_16">1m</CSharpValue>
+                          </InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="s:DateTime">
+                            <CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_13">out_RateDate</CSharpReference>
+                          </OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="s:DateTime">
+                            <CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_17">in_RateDate</CSharpValue>
+                          </InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                    </scg:List>
+                  </ui:MultipleAssign.AssignOperations>
+                </ui:MultipleAssign>
                 <ui:LogMessage sap2010:Annotation.AnnotationText="Records the successful same-currency shortcut without logging a request URL or response." DisplayName="Log same-currency success" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info">
                   <ui:LogMessage.Message>
                     <InArgument x:TypeArguments="x:Object">
@@ -268,45 +285,58 @@
                   </ui:LogMessage.Message>
                 </ui:LogMessage>
               </Sequence>
-            </If.Then>
-            <If.Else>
-              <Sequence sap2010:Annotation.AnnotationText="Builds the Frankfurter request and handles transient failures, HTTP status mapping, and JSON parsing." DisplayName="External rate lookup branch" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                <Assign sap2010:Annotation.AnnotationText="Stores the public API base URL in one variable as required by the workflow contract." DisplayName="Set Frankfurter base URL" sap2010:WorkflowViewState.IdRef="Assign_14">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:String">
-                      <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_14">baseUrl</CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">
-                      <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_19">"https://api.frankfurter.dev/v2/rates"</CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-                <Assign sap2010:Annotation.AnnotationText="Adds the invariant yyyy-MM-dd date and normalized currency query values to the API base URL." DisplayName="Build rate request URL" sap2010:WorkflowViewState.IdRef="Assign_15">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:String">
-                      <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_15">requestUrl</CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">
-                      <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">baseUrl + "?date=" + in_RateDate.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture) + "&amp;base=" + baseCurrency + "&amp;quotes=" + quoteCurrency</CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-                <Assign sap2010:Annotation.AnnotationText="Clears the response-match flag before iterating through the new JSON array." DisplayName="Reset rate-found state" sap2010:WorkflowViewState.IdRef="Assign_16">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:Boolean">
-                      <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_16">rateFound</CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:Boolean">
-                      <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">false</CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
+      </If.Then>
+    </If>
+    <If sap2010:Annotation.AnnotationText="Builds the Frankfurter request and handles transient failures, HTTP status mapping, and JSON parsing when the validated currencies differ." DisplayName="Perform external rate lookup" sap2010:WorkflowViewState.IdRef="If_4">
+      <If.Condition>
+        <InArgument x:TypeArguments="x:Boolean">
+          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_50">baseCurrencyValid &amp;&amp; quoteCurrencyValid &amp;&amp; rateDateValid &amp;&amp; baseCurrency != quoteCurrency</CSharpValue>
+        </InArgument>
+      </If.Condition>
+      <If.Then>
+        <Sequence sap2010:Annotation.AnnotationText="Builds the Frankfurter request and handles transient failures, HTTP status mapping, and JSON parsing." DisplayName="External rate lookup branch" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                <ui:MultipleAssign sap2010:Annotation.AnnotationText="Sets: baseUrl, requestUrl, and rateFound before the external rate request." DisplayName="Prepare rate request" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+                  <ui:MultipleAssign.AssignOperations>
+                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="3">
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">
+                            <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_14">baseUrl</CSharpReference>
+                          </OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">
+                            <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_19">"https://api.frankfurter.dev/v2/rates"</CSharpValue>
+                          </InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">
+                            <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_15">requestUrl</CSharpReference>
+                          </OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">
+                            <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">baseUrl + "?date=" + in_RateDate.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture) + "&amp;base=" + baseCurrency + "&amp;quotes=" + quoteCurrency</CSharpValue>
+                          </InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:Boolean">
+                            <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_16">rateFound</CSharpReference>
+                          </OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:Boolean">
+                            <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">false</CSharpValue>
+                          </InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                    </scg:List>
+                  </ui:MultipleAssign.AssignOperations>
+                </ui:MultipleAssign>
                 <TryCatch sap2010:Annotation.AnnotationText="Contains the external request and response processing so timeouts, connection failures, and malformed responses become a defined result." DisplayName="Call and process rate service" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                   <TryCatch.Try>
                     <Sequence sap2010:Annotation.AnnotationText="Retries the HTTP call, maps supported HTTP statuses, and parses the returned rate array." DisplayName="Rate service try" sap2010:WorkflowViewState.IdRef="Sequence_6">
@@ -419,42 +449,48 @@
                                       </InArgument>
                                     </Switch.Expression>
                                     <Sequence x:Key="True" sap2010:Annotation.AnnotationText="Parses the matching rate and API-returned date using invariant culture." DisplayName="Parse matching quote" sap2010:WorkflowViewState.IdRef="Sequence_11">
-                                      <Assign sap2010:Annotation.AnnotationText="Parses the response rate as Decimal so monetary calculations never use Double." DisplayName="Parse exchange rate" sap2010:WorkflowViewState.IdRef="Assign_19">
-                                        <Assign.To>
-                                          <OutArgument x:TypeArguments="x:Decimal">
-                                            <CSharpReference x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpReference`1_21">parsedRate</CSharpReference>
-                                          </OutArgument>
-                                        </Assign.To>
-                                        <Assign.Value>
-                                          <InArgument x:TypeArguments="x:Decimal">
-                                            <CSharpValue x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpValue`1_31">decimal.Parse(rateItem["rate"].ToString(), System.Globalization.CultureInfo.InvariantCulture)</CSharpValue>
-                                          </InArgument>
-                                        </Assign.Value>
-                                      </Assign>
-                                      <Assign sap2010:Annotation.AnnotationText="Parses the API-returned date with the exact yyyy-MM-dd contract format." DisplayName="Parse returned rate date" sap2010:WorkflowViewState.IdRef="Assign_20">
-                                        <Assign.To>
-                                          <OutArgument x:TypeArguments="s:DateTime">
-                                            <CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_22">parsedRateDate</CSharpReference>
-                                          </OutArgument>
-                                        </Assign.To>
-                                        <Assign.Value>
-                                          <InArgument x:TypeArguments="s:DateTime">
-                                            <CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_32">DateTime.ParseExact(rateItem["date"].ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None)</CSharpValue>
-                                          </InArgument>
-                                        </Assign.Value>
-                                      </Assign>
-                                      <Assign sap2010:Annotation.AnnotationText="Prevents later array items from replacing the first matching quote result." DisplayName="Mark rate as found" sap2010:WorkflowViewState.IdRef="Assign_21">
-                                        <Assign.To>
-                                          <OutArgument x:TypeArguments="x:Boolean">
-                                            <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_23">rateFound</CSharpReference>
-                                          </OutArgument>
-                                        </Assign.To>
-                                        <Assign.Value>
-                                          <InArgument x:TypeArguments="x:Boolean">
-                                            <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_33">true</CSharpValue>
-                                          </InArgument>
-                                        </Assign.Value>
-                                      </Assign>
+                                      <ui:MultipleAssign sap2010:Annotation.AnnotationText="Sets: parsedRate, parsedRateDate, and rateFound for the first matching quote item." DisplayName="Parse matching rate item" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+                                        <ui:MultipleAssign.AssignOperations>
+                                          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="3">
+                                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+                                              <ui:AssignOperation.To>
+                                                <OutArgument x:TypeArguments="x:Decimal">
+                                                  <CSharpReference x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpReference`1_21">parsedRate</CSharpReference>
+                                                </OutArgument>
+                                              </ui:AssignOperation.To>
+                                              <ui:AssignOperation.Value>
+                                                <InArgument x:TypeArguments="x:Decimal">
+                                                  <CSharpValue x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpValue`1_31">decimal.Parse(rateItem["rate"].ToString(), System.Globalization.CultureInfo.InvariantCulture)</CSharpValue>
+                                                </InArgument>
+                                              </ui:AssignOperation.Value>
+                                            </ui:AssignOperation>
+                                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+                                              <ui:AssignOperation.To>
+                                                <OutArgument x:TypeArguments="s:DateTime">
+                                                  <CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_22">parsedRateDate</CSharpReference>
+                                                </OutArgument>
+                                              </ui:AssignOperation.To>
+                                              <ui:AssignOperation.Value>
+                                                <InArgument x:TypeArguments="s:DateTime">
+                                                  <CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_32">DateTime.ParseExact(rateItem["date"].ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None)</CSharpValue>
+                                                </InArgument>
+                                              </ui:AssignOperation.Value>
+                                            </ui:AssignOperation>
+                                            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
+                                              <ui:AssignOperation.To>
+                                                <OutArgument x:TypeArguments="x:Boolean">
+                                                  <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_23">rateFound</CSharpReference>
+                                                </OutArgument>
+                                              </ui:AssignOperation.To>
+                                              <ui:AssignOperation.Value>
+                                                <InArgument x:TypeArguments="x:Boolean">
+                                                  <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_33">true</CSharpValue>
+                                                </InArgument>
+                                              </ui:AssignOperation.Value>
+                                            </ui:AssignOperation>
+                                          </scg:List>
+                                        </ui:MultipleAssign.AssignOperations>
+                                      </ui:MultipleAssign>
                                     </Sequence>
                                   </Switch>
                                 </Sequence>
@@ -473,54 +509,60 @@
                               </InArgument>
                             </Switch.Expression>
                             <Sequence x:Key="True" sap2010:Annotation.AnnotationText="Copies the parsed rate and API-returned date to the outputs and logs success." DisplayName="Successful rate branch" sap2010:WorkflowViewState.IdRef="Sequence_12">
-                              <Assign sap2010:Annotation.AnnotationText="Marks the lookup successful and clears any error message." DisplayName="Set successful rate result" sap2010:WorkflowViewState.IdRef="Assign_22">
-                                <Assign.To>
-                                  <OutArgument x:TypeArguments="x:Boolean">
-                                    <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_24">out_Success</CSharpReference>
-                                  </OutArgument>
-                                </Assign.To>
-                                <Assign.Value>
-                                  <InArgument x:TypeArguments="x:Boolean">
-                                    <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_35">true</CSharpValue>
-                                  </InArgument>
-                                </Assign.Value>
-                              </Assign>
-                              <Assign sap2010:Annotation.AnnotationText="Returns the invariant-culture Decimal rate parsed from the matching JSON item." DisplayName="Return parsed exchange rate" sap2010:WorkflowViewState.IdRef="Assign_23">
-                                <Assign.To>
-                                  <OutArgument x:TypeArguments="x:Decimal">
-                                    <CSharpReference x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpReference`1_25">out_Rate</CSharpReference>
-                                  </OutArgument>
-                                </Assign.To>
-                                <Assign.Value>
-                                  <InArgument x:TypeArguments="x:Decimal">
-                                    <CSharpValue x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpValue`1_36">parsedRate</CSharpValue>
-                                  </InArgument>
-                                </Assign.Value>
-                              </Assign>
-                              <Assign sap2010:Annotation.AnnotationText="Returns the date supplied by the API rather than substituting the requested date." DisplayName="Return API rate date" sap2010:WorkflowViewState.IdRef="Assign_24">
-                                <Assign.To>
-                                  <OutArgument x:TypeArguments="s:DateTime">
-                                    <CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_26">out_RateDate</CSharpReference>
-                                  </OutArgument>
-                                </Assign.To>
-                                <Assign.Value>
-                                  <InArgument x:TypeArguments="s:DateTime">
-                                    <CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_37">parsedRateDate</CSharpValue>
-                                  </InArgument>
-                                </Assign.Value>
-                              </Assign>
-                              <Assign sap2010:Annotation.AnnotationText="Ensures a successful lookup exposes an empty error output." DisplayName="Clear successful error message" sap2010:WorkflowViewState.IdRef="Assign_25">
-                                <Assign.To>
-                                  <OutArgument x:TypeArguments="x:String">
-                                    <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_27">out_ErrorMessage</CSharpReference>
-                                  </OutArgument>
-                                </Assign.To>
-                                <Assign.Value>
-                                  <InArgument x:TypeArguments="x:String">
-                                    <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_38">string.Empty</CSharpValue>
-                                  </InArgument>
-                                </Assign.Value>
-                              </Assign>
+                              <ui:MultipleAssign sap2010:Annotation.AnnotationText="Sets: out_Success, out_Rate, out_RateDate, and out_ErrorMessage for a successful rate lookup." DisplayName="Set successful rate outputs" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Boolean">
+                                          <CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_24">out_Success</CSharpReference>
+                                        </OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Boolean">
+                                          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_35">true</CSharpValue>
+                                        </InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Decimal">
+                                          <CSharpReference x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpReference`1_25">out_Rate</CSharpReference>
+                                        </OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Decimal">
+                                          <CSharpValue x:TypeArguments="x:Decimal" sap2010:WorkflowViewState.IdRef="CSharpValue`1_36">parsedRate</CSharpValue>
+                                        </InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="s:DateTime">
+                                          <CSharpReference x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpReference`1_26">out_RateDate</CSharpReference>
+                                        </OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="s:DateTime">
+                                          <CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_37">parsedRateDate</CSharpValue>
+                                        </InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">
+                                          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_27">out_ErrorMessage</CSharpReference>
+                                        </OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">
+                                          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_38">string.Empty</CSharpValue>
+                                        </InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                              </ui:MultipleAssign>
                               <ui:LogMessage sap2010:Annotation.AnnotationText="Records a successful lookup without logging the full API response or request URL." DisplayName="Log successful rate lookup" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info">
                                 <ui:LogMessage.Message>
                                   <InArgument x:TypeArguments="x:Object">
@@ -612,11 +654,8 @@
                   </TryCatch.Catches>
                 </TryCatch>
               </Sequence>
-            </If.Else>
+            </If.Then>
           </If>
-        </Sequence>
-      </If.Else>
-    </If>
     <ui:LogMessage sap2010:Annotation.AnnotationText="Records the final outcome at Info level after every validation, shortcut, service, or parsing path has assigned outputs." DisplayName="Log workflow end" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info">
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
