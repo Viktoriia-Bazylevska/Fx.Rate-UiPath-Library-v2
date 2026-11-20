@@ -1,39 +1,27 @@
-# UiPath Project: FX.Rates Library v2
+# UiPath Project: FX.Rates.Library.v2
 
 Type: Library · Target: Windows · Expressions: CSharp · Studio: 26.10.0
 
+## What this project is
+
+- A library with one public workflow, `GetExchangeRate.xaml`, published to the tenant library feed as `FX.Rates.Library.v2`.
+- Its public contract is the **Arguments** and **Behaviour** sections of `README.md`. Other processes depend on it: never rename, add, remove or retype an argument, and never change a message text, unless I ask for a breaking change.
+
 ## Working here
 
-- Load the `uipath-rpa` skill for anything touching a workflow file. For other `uip` areas use the
-  matching skill, or `uip <cmd> --help` — not this file.
-- `.xaml`, `.cs` and `project.json` are strict-schema files Studio must be able to reopen. Edit them
-  through the skill's conventions, leave the Studio-generated view-state blocks alone, and run
-  `uip rpa validate` after every change.
-- Done means `uip rpa validate` comes back clean and `uip rpa build` succeeds. A change is not
-  finished until both do.
-- `uip rpa run` executes on this machine and may drive the desktop UI. Confirm with the user first.
-- Only `uip rpa publish` when explicitly asked — it pushes a version to a shared Orchestrator tenant.
+- Load the `uipath-rpa` skill for anything touching a workflow file. For other `uip` areas use the matching skill.
+- `.xaml`, `.cs` and `project.json` are strict-schema files Studio must be able to reopen. Leave the Studio-generated view-state blocks alone and run `uip rpa validate` after every change.
+- Done means `uip rpa validate` is clean, `uip rpa build` succeeds, and the Workflow Analyzer shows 0 errors (ST-MRD-009 and ST-USG-034 may stay).
+- Every activity has a descriptive display name and an annotation.
+- Packages: only `UiPath.System.Activities` and `UiPath.WebAPI.Activities`. Ask before adding any other: a library passes its dependencies on to every process that installs it.
+- Do not publish. The developer publishes from Studio.
+- Git only when I ask: check the staged files first; never commit `Data/Output/`, `.nupkg` packages, credentials, tokens or tenant URLs; use exactly the commit message I give, with no extra lines; never force-push or change remotes.
+- Do not change `README.md` or `AGENTS.md`.
 
 ## Layout
 
-- `NewActivity.xaml` — entry point
-- `project.json` — manifest: dependencies, entry point, expression language, target framework.
-  Ground truth; prefer it over the header above, which is a snapshot from creation time.
-- `.objects/`, `.screenshots/` — Object Repository source. Commit these.
-- `.settings/` — project settings. Commit these.
-- `.local/` — generated. Don't edit or commit.
-
-## When something is missing
-
-- **`uip` not found** — ask the user to install it; it needs admin rights and installs runtimes, so
-  don't run it yourself. A new shell is needed afterwards before `uip` is on PATH.
-  `curl -fsSL https://download.uipath.com/uipath-cli/install.sh | bash` (macOS/Linux) or
-  `irm https://download.uipath.com/uipath-cli/install.ps1 | iex` (Windows).
-  Install trouble behind a corporate proxy is usually `@uipath` npm scope configuration:
-  <https://docs.uipath.com/coding-agents/standalone/latest/user-guide/install-and-set-up>
-- **No UiPath skills in your skill list** — run `uip skills install`, then restart the agent session.
-  Skills installed mid-session are not loaded into the one already running.
-- **Auth error** on anything touching Orchestrator, Studio Web, Integration Service or publishing —
-  ask the user to run `uip login`. It opens a browser, so you can't complete it yourself.
-  Non-interactive alternative: `uip login --client-id <id> --client-secret <secret>`.
-- **No user to ask** (headless or CI) — stop and report the blocker. Don't install, publish, or guess.
+- `GetExchangeRate.xaml`: the library's only public workflow and its entry point
+- `project.json`: manifest (dependencies, entry point, expression language). Ground truth.
+- `test-data/sample-response.json`: a saved Frankfurter response, for reference
+- `.settings/`: project settings. Commit these.
+- `.local/`, `.storage/`: generated. Don't edit or commit.

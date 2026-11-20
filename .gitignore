@@ -14,6 +14,8 @@ CLAUDE.md
 # End of UiPath Studio common ignores
 ################################################################################
 
+.storage/
+
 ################################################################################
 # Added by UiPath Studio
 # Prevent caching and local artifacts from being committed
